@@ -9,7 +9,7 @@ using Reservations.Database;
 namespace Reservations.Database.Migrations
 {
     [DbContext(typeof(ReservationsContext))]
-    [Migration("20180929193224_Reservations-0.1")]
+    [Migration("20180929193946_Reservations-0.1")]
     partial class Reservations01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace Reservations.Database.Migrations
 
                     b.Property<string>("Status");
 
-                    b.Property<int>("TotalGuests");
+                    b.Property<int>("TotalExtras");
 
                     b.HasKey("Id");
 

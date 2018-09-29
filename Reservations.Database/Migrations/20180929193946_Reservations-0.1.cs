@@ -26,7 +26,7 @@ namespace Reservations.Database.Migrations
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Status = table.Column<string>(nullable: true),
-                    TotalGuests = table.Column<int>(nullable: false)
+                    TotalExtras = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

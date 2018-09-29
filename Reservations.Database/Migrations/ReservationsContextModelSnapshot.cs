@@ -41,7 +41,7 @@ namespace Reservations.Database.Migrations
 
                     b.Property<string>("Status");
 
-                    b.Property<int>("TotalGuests");
+                    b.Property<int>("TotalExtras");
 
                     b.HasKey("Id");
 
