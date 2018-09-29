@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservations.WebServices", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservations.Database", "Reservations.Database\Reservations.Database.csproj", "{324E7960-BA22-45A1-8C46-E7D516AE1B1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservations.DataServices", "Reservations.DataServices\Reservations.DataServices.csproj", "{92849B74-536E-4FB7-88F8-159EF9052E2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{324E7960-BA22-45A1-8C46-E7D516AE1B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{324E7960-BA22-45A1-8C46-E7D516AE1B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{324E7960-BA22-45A1-8C46-E7D516AE1B1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92849B74-536E-4FB7-88F8-159EF9052E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92849B74-536E-4FB7-88F8-159EF9052E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92849B74-536E-4FB7-88F8-159EF9052E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92849B74-536E-4FB7-88F8-159EF9052E2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
