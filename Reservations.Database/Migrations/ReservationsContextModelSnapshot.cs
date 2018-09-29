@@ -29,6 +29,8 @@ namespace Reservations.Database.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GuestId");
+
                     b.ToTable("Extras");
                 });
 
@@ -46,6 +48,13 @@ namespace Reservations.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Guests");
+                });
+
+            modelBuilder.Entity("Reservations.Database.Models.Extra", b =>
+                {
+                    b.HasOne("Reservations.Database.Models.Guest")
+                        .WithMany()
+                        .HasForeignKey("GuestId");
                 });
 #pragma warning restore 612, 618
         }

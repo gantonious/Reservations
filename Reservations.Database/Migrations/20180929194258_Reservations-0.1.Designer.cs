@@ -9,7 +9,7 @@ using Reservations.Database;
 namespace Reservations.Database.Migrations
 {
     [DbContext(typeof(ReservationsContext))]
-    [Migration("20180929193946_Reservations-0.1")]
+    [Migration("20180929194258_Reservations-0.1")]
     partial class Reservations01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,8 @@ namespace Reservations.Database.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GuestId");
+
                     b.ToTable("Extras");
                 });
 
@@ -48,6 +50,13 @@ namespace Reservations.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Guests");
+                });
+
+            modelBuilder.Entity("Reservations.Database.Models.Extra", b =>
+                {
+                    b.HasOne("Reservations.Database.Models.Guest")
+                        .WithMany()
+                        .HasForeignKey("GuestId");
                 });
 #pragma warning restore 612, 618
         }

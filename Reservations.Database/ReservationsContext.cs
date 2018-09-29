@@ -13,5 +13,10 @@ namespace Reservations.Database
             
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Guest>()
+                .HasMany<Extra>();
+        }
     }
 }
