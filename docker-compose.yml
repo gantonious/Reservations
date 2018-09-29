@@ -10,7 +10,7 @@ services:
   web:
     build: .
     environment:
-      - DATABASE_CONNECTION_STRING
+      - DATABASE_CONNECTION_STRING=Host=database;Username=${POSTGRES_USERNAME};Password=${POSTGRES_PASSWORD}
     ports:
       - "5000:80"
     depends_on:
