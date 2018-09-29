@@ -1,6 +1,7 @@
 ﻿using System;
 using Reservations.Database;
 using Reservations.Database.Models;
+using Reservations.DataServices.Models;
 
 namespace Reservations.DataServices
 {
@@ -13,12 +14,13 @@ namespace Reservations.DataServices
             _reservationsContext = reservationsContext;
         }
 
-        private Guest BuildGuest(string name, int maxExtras)
+        private GuestTableEntry BuildGuest(string name, int maxExtras)
         {
-            return new Guest
+            return new GuestTableEntry
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 Name = name,
+                Status = GuestStatus.NO_RESPONSE,
                 TotalExtras = maxExtras,
             };
         }

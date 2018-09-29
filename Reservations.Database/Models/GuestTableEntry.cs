@@ -2,7 +2,7 @@
 
 namespace Reservations.Database.Models
  {
-     public class Guest
+     public class GuestTableEntry
      {
          public string Id { get; set; }
          public string Name { get; set; }

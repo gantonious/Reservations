@@ -5,8 +5,8 @@ namespace Reservations.Database
 {
     public class ReservationsContext : DbContext
     {
-        public DbSet<Guest> Guests { get; set; }
-        public DbSet<Extra> Extras { get; set; }
+        public DbSet<GuestTableEntry> Guests { get; set; }
+        public DbSet<ExtraTableEntry> Extras { get; set; }
 
         public ReservationsContext(DbContextOptions contextOptions) : base(contextOptions)
         {
@@ -15,8 +15,8 @@ namespace Reservations.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Guest>()
-                .HasMany<Extra>();
+            modelBuilder.Entity<GuestTableEntry>()
+                .HasMany<ExtraTableEntry>();
         }
     }
 }
