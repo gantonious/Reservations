@@ -1,0 +1,14 @@
+version: '3'
+services:
+  database:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  web:
+    build: .
+    environment:
+      - RESERVATIONS_CONNECTION_STRING
+    ports:
+      - "5000:80"
+    depends_on:
+      - database
