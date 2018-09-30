@@ -6,7 +6,7 @@ namespace Reservations.Database
 {
     public class DesignTimeReservationsContextFactory : IDesignTimeDbContextFactory<ReservationsContext>
     {
-        private const string CONNECTION_STRING_ENV_VARIABLE = "RESERVATIONS_CONNECTION_STRING";
+        private const string CONNECTION_STRING_ENV_VARIABLE = "DATABASE_CONNECTION_STRING";
         
         public ReservationsContext CreateDbContext(string[] args)
         {

@@ -3,14 +3,15 @@ services:
   database:
     image: postgres
     environment:
-      - POSTGRES_USERNAME
       - POSTGRES_PASSWORD
+    ports:
+      - "5432:5432"
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
   web:
     build: .
     environment:
-      - DATABASE_CONNECTION_STRING=Host=database;Username=${POSTGRES_USERNAME};Password=${POSTGRES_PASSWORD}
+      - DATABASE_CONNECTION_STRING=Host=database;Username=postgres;Password=${POSTGRES_PASSWORD}
     ports:
       - "5000:80"
     depends_on:

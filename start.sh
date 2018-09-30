@@ -1,0 +1,2 @@
+dotnet ef database update -p Reservations.Database/Reservations.Database.csproj -s Reservations.WebServices/Reservations.WebServices.csproj
+dotnet run --project Reservations.WebServices/Reservations.WebServices.csproj

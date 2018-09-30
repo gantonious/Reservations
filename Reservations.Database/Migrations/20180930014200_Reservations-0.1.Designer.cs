@@ -9,7 +9,7 @@ using Reservations.Database;
 namespace Reservations.Database.Migrations
 {
     [DbContext(typeof(ReservationsContext))]
-    [Migration("20180929195852_Reservations-0.1")]
+    [Migration("20180930014200_Reservations-0.1")]
     partial class Reservations01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,23 +20,23 @@ namespace Reservations.Database.Migrations
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Reservations.Database.Models.Extra", b =>
+            modelBuilder.Entity("Reservations.Database.Models.ExtraTableEntry", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("GuestId");
+                    b.Property<string>("GuestTableEntryId");
 
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GuestId");
+                    b.HasIndex("GuestTableEntryId");
 
                     b.ToTable("Extras");
                 });
 
-            modelBuilder.Entity("Reservations.Database.Models.Guest", b =>
+            modelBuilder.Entity("Reservations.Database.Models.GuestTableEntry", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -52,11 +52,11 @@ namespace Reservations.Database.Migrations
                     b.ToTable("Guests");
                 });
 
-            modelBuilder.Entity("Reservations.Database.Models.Extra", b =>
+            modelBuilder.Entity("Reservations.Database.Models.ExtraTableEntry", b =>
                 {
-                    b.HasOne("Reservations.Database.Models.Guest")
+                    b.HasOne("Reservations.Database.Models.GuestTableEntry")
                         .WithMany()
-                        .HasForeignKey("GuestId");
+                        .HasForeignKey("GuestTableEntryId");
                 });
 #pragma warning restore 612, 618
         }

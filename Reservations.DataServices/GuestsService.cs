@@ -57,7 +57,7 @@ namespace Reservations.DataServices
         private IEnumerable<ExtraTableEntry> GetExtrasForGuest(string guestId)
         {
             return _reservationsContext.Extras
-                .Where(e => e.GuestId == guestId);
+                .Where(e => e.GuestTableEntryId == guestId);
         }
         
         private static GuestTableEntry BuildGuest(string name, int maxExtras)

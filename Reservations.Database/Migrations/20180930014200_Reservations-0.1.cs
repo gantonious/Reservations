@@ -25,24 +25,24 @@ namespace Reservations.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    GuestId = table.Column<string>(nullable: true),
+                    GuestTableEntryId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Extras", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Extras_Guests_GuestId",
-                        column: x => x.GuestId,
+                        name: "FK_Extras_Guests_GuestTableEntryId",
+                        column: x => x.GuestTableEntryId,
                         principalTable: "Guests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Extras_GuestId",
+                name: "IX_Extras_GuestTableEntryId",
                 table: "Extras",
-                column: "GuestId");
+                column: "GuestTableEntryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
