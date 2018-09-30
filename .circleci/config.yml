@@ -13,9 +13,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Sync deployment script
-        command:
-          scp deploy.sh $DEPLOY_USER@$DEPLOY_IP:~/.
+          name: Sync deployment script
+          command:
+            scp deploy.sh $DEPLOY_USER@$DEPLOY_IP:~/.
       - run:
           name: Running deployment script
           command: |
