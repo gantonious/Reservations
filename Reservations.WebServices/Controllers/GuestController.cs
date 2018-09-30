@@ -58,7 +58,6 @@ namespace Reservations.WebServices.Controllers
                 
             }
         }
-       
     }
 
     public class UpdateStatusRequest
