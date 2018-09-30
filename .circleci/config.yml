@@ -11,8 +11,13 @@ jobs:
     machine:
       enabled: true
     steps:
+      - checkout
       - run:
-          name: Deploy to $DEPLOY_USER@$DEPLOY_IP
+        name: Sync deployment script
+        command:
+          scp deploy.sh $DEPLOY_USER@$DEPLOY_IP:~/.
+      - run:
+          name: Running deployment script
           command: |
             ssh $DEPLOY_USER@$DEPLOY_IP "bash deploy.sh"
 
