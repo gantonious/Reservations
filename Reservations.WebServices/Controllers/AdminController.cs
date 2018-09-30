@@ -6,7 +6,7 @@ using Reservations.DataServices.Models;
 
 namespace Reservations.WebServices.Controllers
 {
-    [Route("api/admin/guests")]
+    [Route("api/admin")]
     public class AdminController : Controller
     {
         private readonly GuestsService _guestsService;
@@ -16,17 +16,24 @@ namespace Reservations.WebServices.Controllers
             _guestsService = guestsService;
         }
 
-        [HttpGet]
+        [HttpGet("guests")]
         public IEnumerable<Guest> GetGuests()
         {
             return _guestsService.GetAllGuests();
         }
 
-        [HttpPost]
+        [HttpPost("guests")]
         public async Task AddGuestAsync([FromBody] AddGuestRequest addGuestRequest)
         {
             await _guestsService.AddGuestAsync(addGuestRequest.Name, addGuestRequest.MaxGuests);
         }
+
+        [HttpGet("stats")]
+        public async Task<Stats> GetStatsAsync()
+        {
+            return await _guestsService.GetStatsAsync();
+        }
+        
     }
 
     public class AddGuestRequest

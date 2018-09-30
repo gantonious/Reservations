@@ -19,6 +19,30 @@ namespace Reservations.DataServices
             _reservationsContext = reservationsContext;
         }
 
+        public async Task<Stats> GetStatsAsync()
+        {
+            var guestsThatHaveNotResponded = _reservationsContext.Guests
+                .Where(g => g.Status == GuestStatus.NO_RESPONSE.ToString());
+            
+            var guestsNotAttending = _reservationsContext.Guests
+                .Where(g => g.Status == GuestStatus.NOT_COMING.ToString());
+            
+            var guestsAttendingIds = _reservationsContext.Guests
+                .Where(g => g.Status == GuestStatus.ATTENDING.ToString())
+                .Select(g => g.Id);
+            
+            var extrasAttending = _reservationsContext.Extras
+                .Where(e => guestsAttendingIds.Contains(e.GuestTableEntryId));
+
+            return new Stats
+            {
+                TotalAttending = await guestsAttendingIds.CountAsync(),
+                TotalExtras = await extrasAttending.CountAsync(),
+                TotalUnresponsive = await guestsThatHaveNotResponded.CountAsync(),
+                TotalNotAttending = await guestsNotAttending.CountAsync()
+            };
+        }
+        
         public IEnumerable<Guest> GetAllGuests()
         {
             return _reservationsContext.Guests
