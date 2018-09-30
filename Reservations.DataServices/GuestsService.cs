@@ -80,6 +80,7 @@ namespace Reservations.DataServices
                 Id = guestTableEntry.Id,
                 Name = guestTableEntry.Name,
                 MaxExtras = guestTableEntry.TotalExtras,
+                Status = status,
                 Extras = extrasTableEntries.Select(e => e.Name)
             };
         }

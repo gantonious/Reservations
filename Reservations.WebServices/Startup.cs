@@ -30,7 +30,7 @@ namespace Reservations.WebServices
                 {
                     options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING"));
                 });
-            services.AddSingleton<GuestsService>();
+            services.AddScoped<GuestsService>();
             
             services.AddMvc();
         }
