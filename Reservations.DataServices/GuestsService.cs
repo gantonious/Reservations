@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reservations.Database;
@@ -54,6 +55,34 @@ namespace Reservations.DataServices
             await _reservationsContext.SaveChangesAsync();
         }
 
+        public async Task UpdateGuestStatusAsync(string guestId, GuestStatus status)
+        {
+            var guest = await _reservationsContext.Guests.FirstOrDefaultAsync(g => g.Id == guestId);
+            GuardAgainstNullGuestTableEntry(guestId, guest);
+            guest.Status = status.ToString();
+
+            _reservationsContext.Update(guest);
+            await _reservationsContext.SaveChangesAsync();
+        }
+        
+        public async Task UpdateExtrasAsync(string guestId, IEnumerable<string> extras)
+        {
+            var guest = await _reservationsContext.Guests.FirstOrDefaultAsync(g => g.Id == guestId);
+            GuardAgainstNullGuestTableEntry(guestId, guest);
+
+            var newExtras = extras.Select(name => BuildExtra(name, guestId));
+            await _reservationsContext.AddRangeAsync(newExtras);
+            await _reservationsContext.SaveChangesAsync();
+        }
+
+        private static void GuardAgainstNullGuestTableEntry(string identifier, GuestTableEntry guestTableEntry)
+        {
+            if (guestTableEntry == null)
+            {
+                throw new NoGuestFoundException(identifier);
+            }
+        }
+        
         private IEnumerable<ExtraTableEntry> GetExtrasForGuest(string guestId)
         {
             return _reservationsContext.Extras
@@ -70,7 +99,17 @@ namespace Reservations.DataServices
                 TotalExtras = maxExtras,
             };
         }
-
+        
+        private static ExtraTableEntry BuildExtra(string name, string guestId)
+        {
+            return new ExtraTableEntry
+            {
+                Id = Guid.NewGuid().ToString(),
+                GuestTableEntryId = guestId,
+                Name = name
+            };
+        }
+        
         private static Guest BuildGuestFrom(GuestTableEntry guestTableEntry, IEnumerable<ExtraTableEntry> extrasTableEntries)
         {
             Enum.TryParse(guestTableEntry.Status, out GuestStatus status);
@@ -83,6 +122,14 @@ namespace Reservations.DataServices
                 Status = status,
                 Extras = extrasTableEntries.Select(e => e.Name)
             };
+        }
+    }
+    
+    public class NoGuestFoundException : Exception
+    {
+        public NoGuestFoundException(string identifier) : base($"No guest found matching [{identifier}].")
+        {
+            
         }
     }
 }
