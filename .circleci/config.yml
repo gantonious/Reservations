@@ -15,3 +15,15 @@ jobs:
           name: Deploy to $DEPLOY_USER@$DEPLOY_IP
           command: |
             ssh $DEPLOY_USER@$DEPLOY_IP "bash deploy.sh"
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
