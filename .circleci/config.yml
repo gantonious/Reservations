@@ -7,3 +7,11 @@ jobs:
       - checkout
       - run: dotnet restore
       - run: dotnet build
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy to $DEPLOY_USER@$DEPLOY_IP
+          command: |
+            ssh $DEPLOY_USER@$DEPLOY_IP "bash deploy.sh"
