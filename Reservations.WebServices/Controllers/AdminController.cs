@@ -33,7 +33,7 @@ namespace Reservations.WebServices.Controllers
             });
         }
         
-        [HttpPost("guests")]
+        [HttpPost("guests/bulk")]
         public async Task AddGuestsAsync([FromBody] IEnumerable<AddGuestRequest> addGuestRequests)
         {
             await _guestsService.AddGuestsAsync(addGuestRequests.Select(r => new AddGuestParameters
@@ -43,7 +43,7 @@ namespace Reservations.WebServices.Controllers
             }));
         }
 
-        [HttpDelete("guests")]
+        [HttpDelete("guests/bulk")]
         public async Task DeleteGuestsAsync()
         {
             await _guestsService.DeleteAllGuestsAsync();
