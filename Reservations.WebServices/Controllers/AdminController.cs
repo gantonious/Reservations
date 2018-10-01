@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Reservations.DataServices;
@@ -25,7 +26,21 @@ namespace Reservations.WebServices.Controllers
         [HttpPost("guests")]
         public async Task AddGuestAsync([FromBody] AddGuestRequest addGuestRequest)
         {
-            await _guestsService.AddGuestAsync(addGuestRequest.Name, addGuestRequest.MaxGuests);
+            await _guestsService.AddGuestAsync(new AddGuestParameters
+            {
+                Name = addGuestRequest.Name,
+                MaxExtras = addGuestRequest.MaxGuests
+            });
+        }
+        
+        [HttpPost("guests")]
+        public async Task AddGuestsAsync([FromBody] IEnumerable<AddGuestRequest> addGuestRequests)
+        {
+            await _guestsService.AddGuestsAsync(addGuestRequests.Select(r => new AddGuestParameters
+            {
+                Name = r.Name,
+                MaxExtras = r.MaxGuests
+            }));
         }
 
         [HttpGet("stats")]

@@ -65,10 +65,20 @@ namespace Reservations.DataServices
                 .FirstOrDefaultAsync();
         }
 
-        public async Task AddGuestAsync(string name, int maxExtras)
+        public async Task AddGuestAsync(AddGuestParameters addGuestParameters)
         {
-            var newGuest = BuildGuest(name, maxExtras);
+            var newGuest = BuildGuest(addGuestParameters.Name, addGuestParameters.MaxExtras);
             await _reservationsContext.Guests.AddAsync(newGuest);
+            await _reservationsContext.SaveChangesAsync();
+        }
+        
+        public async Task AddGuestsAsync(IEnumerable<AddGuestParameters> addGuestParameters)
+        {
+            var addGuestTasks = addGuestParameters
+                .Select(p => BuildGuest(p.Name, p.MaxExtras))
+                .Select(g => _reservationsContext.Guests.AddAsync(g));
+
+            await Task.WhenAll(addGuestTasks);
             await _reservationsContext.SaveChangesAsync();
         }
 
@@ -155,5 +165,11 @@ namespace Reservations.DataServices
         {
             
         }
+    }
+
+    public class AddGuestParameters
+    {
+        public string Name { get; set; }
+        public int MaxExtras { get; set; }
     }
 }
