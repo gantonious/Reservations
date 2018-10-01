@@ -6,7 +6,7 @@ using Reservations.DataServices.Models;
 
 namespace Reservations.WebServices.Controllers
 {
-    [Route("api/admin")]
+    [Route("v1/admin")]
     public class AdminController : Controller
     {
         private readonly GuestsService _guestsService;
