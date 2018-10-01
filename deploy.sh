@@ -1,5 +1,7 @@
 PROJECT_PATH=./Reservations
 
+source ~/.profile
+
 if [ -z "${POSTGRES_PASSWORD}"]; then
   echo "====GENERATING DB PASSWORD===="
   DB_PASSWORD="$(pwgen 50 1)"
