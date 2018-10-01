@@ -88,6 +88,12 @@ namespace Reservations.DataServices
             _reservationsContext.Guests.Remove(guest);
             await _reservationsContext.SaveChangesAsync();
         }
+        
+        public async Task DeleteAllGuestsAsync()
+        {
+            _reservationsContext.Guests.RemoveRange(_reservationsContext.Guests);
+            await _reservationsContext.SaveChangesAsync();
+        }
 
         public async Task UpdateGuestStatusAsync(string guestId, GuestStatus status)
         {

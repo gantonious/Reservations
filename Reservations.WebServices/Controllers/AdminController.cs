@@ -43,6 +43,12 @@ namespace Reservations.WebServices.Controllers
             }));
         }
 
+        [HttpDelete("guests")]
+        public async Task DeleteGuestsAsync()
+        {
+            await _guestsService.DeleteAllGuestsAsync();
+        }
+
         [HttpGet("stats")]
         public async Task<Stats> GetStatsAsync()
         {
