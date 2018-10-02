@@ -23,10 +23,10 @@ namespace Reservations.WebServices.Middleware
         
         public async Task Invoke(HttpContext context)
         {
-            var path = context.Request.Path;
+            var path = context.Request.Path.ToString();
 
             // endpoint is not protected so we can go ahead and not use it
-            if (!_options.ProtectedPaths.Any(p => path.Equals(p, StringComparison.OrdinalIgnoreCase)))
+            if (!_options.ProtectedPaths.Any(p => path.Contains(p, StringComparison.OrdinalIgnoreCase)))
             {
                 await _next(context);
                 return;
