@@ -9,6 +9,9 @@ if [ -z "${POSTGRES_PASSWORD}" ]; then
   source ~/.profile
 fi
 
+echo "====LOADING SECRETS===="
+source ./secrets.sh
+
 if [ -d "$PROJECT_PATH" ]; then
   echo "====PULLING LATEST===="
   cd $PROJECT_PATH

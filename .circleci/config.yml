@@ -13,12 +13,16 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Push secrets
+          command:
+            ssh $DEPLOY_USER@$DEPLOY_IP "rm ./secrets.sh; echo export HASHED_ADMIN_TOKEN=$HASHED_ADMIN_TOKEN >> ./secrets.sh"
+      - run:
           name: Sync deployment script
           command:
             scp deploy.sh $DEPLOY_USER@$DEPLOY_IP:~/.
       - run:
           name: Running deployment script
-          command: |
+          command:
             ssh $DEPLOY_USER@$DEPLOY_IP "bash deploy.sh"
 
 workflows:
