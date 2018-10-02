@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Reservations.Database;
 using Reservations.DataServices;
+using Reservations.WebServices.Middleware;
 
 namespace Reservations.WebServices
 {
@@ -43,6 +45,19 @@ namespace Reservations.WebServices
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseTokenProtection(new TokenProtectedMiddleware.Options
+            {
+                ProtectedPaths = new List<string>
+                {
+                    "/v1/admin/guests",
+                    "/v1/admin/guests/bulk"
+                },
+                HashedValidTokens = new List<string>()
+                {
+                    Environment.GetEnvironmentVariable("HASHED_ADMIN_TOKEN")
+                }
+            });
+            
             app.UseMvc();
         }
     }
