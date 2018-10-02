@@ -14,17 +14,19 @@ def upload_guests(config)
 
     uri = URI('https://api.georgeandjessica.ca/v1/admin/guests/bulk')
     req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+    req['Authorization'] = config[:token]
     req.body = guests.to_json
     http = Net::HTTP.new(uri.hostname, uri.port)
     http.use_ssl = true
     res = http.request(req)
+    puts res
 end
 
 def parse_args(args)
     config = {}
 
     option_parser = OptionParser.new do |options|
-        options.on("-a", "--authentication [TOKEN]",
+        options.on("-t", "--token [TOKEN]",
             "Token used to authenticate to reservations") do |token|
             config[:token] = token
         end

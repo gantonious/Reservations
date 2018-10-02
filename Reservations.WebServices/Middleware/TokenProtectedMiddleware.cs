@@ -32,7 +32,7 @@ namespace Reservations.WebServices.Middleware
                 return;
             }
             
-            var authHeader = context.Request.Headers["Authorization"];
+            var authHeader = context.Request.Headers["Authorization"].ToString() ?? "";
             var hashOfAuthHeader = GetSha256HashOf(authHeader);
                 
             if (_options.HashedValidTokens.Any(t => hashOfAuthHeader.Equals(t, StringComparison.OrdinalIgnoreCase)))
