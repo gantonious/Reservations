@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservations.Database", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservations.DataServices", "Reservations.DataServices\Reservations.DataServices.csproj", "{92849B74-536E-4FB7-88F8-159EF9052E2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservations.Sdk", "Reservations.Sdk\Reservations.Sdk.csproj", "{20011017-08DE-4D35-B243-F8A45A305964}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{92849B74-536E-4FB7-88F8-159EF9052E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92849B74-536E-4FB7-88F8-159EF9052E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92849B74-536E-4FB7-88F8-159EF9052E2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20011017-08DE-4D35-B243-F8A45A305964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20011017-08DE-4D35-B243-F8A45A305964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20011017-08DE-4D35-B243-F8A45A305964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20011017-08DE-4D35-B243-F8A45A305964}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
