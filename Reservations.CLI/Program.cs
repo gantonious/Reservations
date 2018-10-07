@@ -1,12 +1,22 @@
 ﻿using System;
+using CommandLine;
 
 namespace Reservations.CLI
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static int RunAddGuests(AddGuestsOption options)
         {
-            Console.WriteLine("Hello World!");
+            return 0;
+        }
+        
+        public static int Main(string[] args)
+        {
+            return CommandLine.Parser.Default.ParseArguments<AddGuestsOption>(args)
+                .MapResult(
+                    (AddGuestsOption options) => RunAddGuests(options),
+                    errs => 1
+                );
         }
     }
 }
