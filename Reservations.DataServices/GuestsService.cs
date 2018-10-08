@@ -131,9 +131,12 @@ namespace Reservations.DataServices
         
         private static GuestTableEntry BuildGuest(string name, int maxExtras)
         {
+            var firstName = name.Split(" ").First();
+            var randomString = Guid.NewGuid().ToString().Split("-").First();
+            
             return new GuestTableEntry
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = $"{firstName}-{randomString.ToLower()}",
                 Name = name,
                 Status = GuestStatus.NO_RESPONSE.ToString(),
                 TotalExtras = maxExtras,
