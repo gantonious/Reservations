@@ -136,7 +136,7 @@ namespace Reservations.DataServices
             
             return new GuestTableEntry
             {
-                Id = $"{firstName}-{randomString.ToLower()}",
+                Id = $"{firstName.ToLower()}-{randomString.ToLower()}",
                 Name = name,
                 Status = GuestStatus.NO_RESPONSE.ToString(),
                 TotalExtras = maxExtras,
