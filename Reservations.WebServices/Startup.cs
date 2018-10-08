@@ -61,6 +61,8 @@ namespace Reservations.WebServices
             app.UseCors(b => 
                 b.WithOrigins("https://georgeandjessica.ca")
                  .WithOrigins("http://localhost")
+                 .AllowAnyHeader()
+                 .AllowAnyMethod()
             );
             
             app.UseMvc();
