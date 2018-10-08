@@ -25,7 +25,7 @@ namespace Reservations.CLI
             using (var streamReader = new StreamReader(_guestListCsvFile))
             using (var csvReader = new CsvReader(streamReader))
             {
-                var guests = csvReader.GetRecords<GuestListItem>();
+                var guests = csvReader.GetRecords<GuestListItem>().ToList();
                 var guestUploadRequests = guests.Select(g => new AddGuestRequest
                 {
                     Name = g.Name,
@@ -33,7 +33,7 @@ namespace Reservations.CLI
                 });
 
                 await _reservationsClient.AddGuestsAsync(guestUploadRequests);
-                Console.WriteLine($"Succesfully uploaded {guests.Count()} guests");
+                Console.WriteLine($"Succesfully uploaded {guests.Count()} guests.");
             }
         }
     }
