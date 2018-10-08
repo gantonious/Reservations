@@ -57,6 +57,11 @@ namespace Reservations.WebServices
                     Environment.GetEnvironmentVariable("HASHED_ADMIN_TOKEN")
                 }
             });
+
+            app.UseCors(b => 
+                b.WithOrigins("https://georgeandjessica.ca")
+                 .WithOrigins("http://localhost")
+            );
             
             app.UseMvc();
         }
