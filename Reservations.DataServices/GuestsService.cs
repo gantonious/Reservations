@@ -101,7 +101,7 @@ namespace Reservations.DataServices
             GuardAgainstNullGuestTableEntry(guestId, guest);
             guest.Status = status.ToString();
 
-            _reservationsContext.Update(guest);
+            _reservationsContext.Guests.Update(guest);
             await _reservationsContext.SaveChangesAsync();
         }
         
@@ -117,8 +117,11 @@ namespace Reservations.DataServices
                 throw new TooManyExtrasException(extrasList.Count(), guest.TotalExtras);
             }
 
+            var oldExtras = _reservationsContext.Extras.Where(e => e.GuestTableEntryId == guestId);
             var newExtras = extrasList.Select(name => BuildExtra(name, guestId));
-            await _reservationsContext.AddRangeAsync(newExtras);
+            
+            _reservationsContext.Extras.RemoveRange(oldExtras);
+            await _reservationsContext.Extras.AddRangeAsync(newExtras);
             await _reservationsContext.SaveChangesAsync();
         }
 
