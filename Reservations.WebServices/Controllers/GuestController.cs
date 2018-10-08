@@ -53,9 +53,13 @@ namespace Reservations.WebServices.Controllers
                 {
                     return BadRequest($"{updateStatusRequest.Status} is not a valid status.");
                 }
-              
+
                 await _guestsService.UpdateGuestStatusAsync(guestId, status);
                 return Ok();
+            }
+            catch (TooManyExtrasException ex)
+            {
+                return BadRequest(ex.Message);
             }
             catch (NoGuestFoundException)
             {
