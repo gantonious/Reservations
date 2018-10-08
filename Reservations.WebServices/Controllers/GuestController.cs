@@ -57,10 +57,6 @@ namespace Reservations.WebServices.Controllers
                 await _guestsService.UpdateGuestStatusAsync(guestId, status);
                 return Ok();
             }
-            catch (TooManyExtrasException ex)
-            {
-                return BadRequest(ex.Message);
-            }
             catch (NoGuestFoundException)
             {
                 return NotFound();
@@ -75,6 +71,10 @@ namespace Reservations.WebServices.Controllers
             {
                 await _guestsService.UpdateExtrasAsync(guestId, updateExtrasRequest.Extras);
                 return Ok();
+            }
+            catch (TooManyExtrasException ex)
+            {
+                return BadRequest(ex.Message);
             }
             catch (NoGuestFoundException)
             {
