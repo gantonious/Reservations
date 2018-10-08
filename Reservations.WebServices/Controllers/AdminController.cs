@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Reservations.DataServices;
 using Reservations.DataServices.Models;
+using Reservations.WebServices.Models;
 
 namespace Reservations.WebServices.Controllers
 {
@@ -18,9 +19,9 @@ namespace Reservations.WebServices.Controllers
         }
 
         [HttpGet("guests")]
-        public IEnumerable<Guest> GetGuests()
+        public IEnumerable<GuestV1> GetGuests()
         {
-            return _guestsService.GetAllGuests();
+            return _guestsService.GetAllGuests().Select(g => g.AsGuestV1());
         }
 
         [HttpPost("guests")]

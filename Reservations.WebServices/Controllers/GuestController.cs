@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Reservations.DataServices;
 using Reservations.DataServices.Models;
+using Reservations.WebServices.Models;
 
 namespace Reservations.WebServices.Controllers
 {
@@ -26,7 +28,7 @@ namespace Reservations.WebServices.Controllers
                 return NotFound();
             }
 
-            return Ok(guest);
+            return Ok(guest.AsGuestV1());
         }
 
         [HttpPost("{guestId}/status")]
@@ -34,7 +36,12 @@ namespace Reservations.WebServices.Controllers
         {
             try
             {
-                await _guestsService.UpdateGuestStatusAsync(guestId, updateStatusRequest.Status);
+                if (!Enum.TryParse<GuestStatus>(updateStatusRequest.Status, out var status))
+                {
+                    return BadRequest($"{updateStatusRequest.Status} is not a valid status.");
+                }
+              
+                await _guestsService.UpdateGuestStatusAsync(guestId, status);
                 return Ok();
             }
             catch (NoGuestFoundException)
@@ -62,7 +69,7 @@ namespace Reservations.WebServices.Controllers
 
     public class UpdateStatusRequest
     {
-        public GuestStatus Status { get; set; }
+        public string Status { get; set; }
     }
     
     public class UpdateExtrasRequest
