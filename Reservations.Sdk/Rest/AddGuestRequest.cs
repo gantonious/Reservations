@@ -3,6 +3,6 @@
     public class AddGuestRequest
     {
         public string Name { get; set; }
-        public string MaxExtras { get; set; }
+        public int MaxExtras { get; set; }
     }
 }
