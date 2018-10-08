@@ -30,6 +30,19 @@ namespace Reservations.WebServices.Controllers
 
             return Ok(guest.AsGuestV1());
         }
+        
+        [HttpGet("{guestId}")]
+        public async Task<IActionResult> GetGuestByIdAsync(string guestId)
+        {
+            var guest = await _guestsService.GetGuest(guestId);
+
+            if (guest == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(guest.AsGuestV1());
+        }
 
         [HttpPost("{guestId}/status")]
         public async Task<IActionResult> UpdateGuestStatusAsync(string guestId, [FromBody] UpdateStatusRequest updateStatusRequest)
