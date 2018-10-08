@@ -110,7 +110,14 @@ namespace Reservations.DataServices
             var guest = await _reservationsContext.Guests.FirstOrDefaultAsync(g => g.Id == guestId);
             GuardAgainstNullGuestTableEntry(guestId, guest);
 
-            var newExtras = extras.Select(name => BuildExtra(name, guestId));
+            var extrasList = extras.ToList();
+            
+            if (extrasList.Count() > guest.TotalExtras)
+            {
+                throw new TooManyExtrasException(extrasList.Count(), guest.TotalExtras);
+            }
+
+            var newExtras = extrasList.Select(name => BuildExtra(name, guestId));
             await _reservationsContext.AddRangeAsync(newExtras);
             await _reservationsContext.SaveChangesAsync();
         }
@@ -171,6 +178,14 @@ namespace Reservations.DataServices
     public class NoGuestFoundException : Exception
     {
         public NoGuestFoundException(string identifier) : base($"No guest found matching [{identifier}].")
+        {
+            
+        }
+    }
+    
+    public class TooManyExtrasException : Exception
+    {
+        public TooManyExtrasException(int totalExtra, int maxExtras) : base($"Tried to add {totalExtra} when guest has a max of {maxExtras} guests.")
         {
             
         }
