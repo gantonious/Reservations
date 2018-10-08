@@ -59,8 +59,7 @@ namespace Reservations.WebServices
             });
 
             app.UseCors(b => 
-                b.WithOrigins("https://georgeandjessica.ca")
-                 .WithOrigins("http://localhost")
+                b.AllowAnyOrigin()
                  .AllowAnyHeader()
                  .AllowAnyMethod()
             );
